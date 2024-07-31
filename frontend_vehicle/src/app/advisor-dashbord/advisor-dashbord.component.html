@@ -1,0 +1,66 @@
+<div class="p-4">
+    <h2 class="text-center text-2xl font-bold mb-4">Pending Vehicles</h2>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="py-3 px-4 text-left">Vehicle Number</th>
+                    <th class="py-3 px-4 text-left">Vehicle Name</th>
+                    <th class="py-3 px-4 text-left">Customer Name</th>
+                    <th class="py-3 px-4 text-left">Status</th>
+                    <th class="py-3 px-4 text-left">Invoice</th>
+                    <th class="py-3 px-4 text-left">Complete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vehicle of vehicles" class="border-b hover:bg-gray-100">
+                    <td class="py-3 px-4">{{ vehicle.plateNumber }}</td>
+                    <td class="py-3 px-4">{{ vehicle.vehicleName }}</td>
+                    <td class="py-3 px-4">{{ vehicle.customerName }}</td>
+                    <td class="py-3 px-4">{{ vehicle.status }}</td>
+                    <td class="py-3 px-4">
+                        <button (click)="doneBtnClick(vehicle)" type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Done</button>
+                    </td>
+                    <td class="py-3 px-4">
+                        <button (click)="completeBtnClick(vehicle)" type="button"
+                            class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2.5 py-1.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">Complete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<form #serviceForm="ngForm" (ngSubmit)="submitBtnClick()">
+    <div id="popup" style="display: none;">
+        <div id="popup-content">
+            <div class="relative">
+                <div class="absolute top-0 right-0">
+                    <svg (click)="closePopup()" id="close" class="cursor-pointer w-6 h-6 text-gray-800 dark:text-white"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18 17.94 6M18 18 6.06 6" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="items-center mt-3 mb-4">
+                <h1 class="text-center text-black font-semibold text-2xl mb-3">Services included</h1>
+                <div *ngFor="let service of services">
+                    <input type="checkbox" [id]="service.name" [(ngModel)]="service.checked" [name]="service.name"
+                        class="w-4 h-4 text-blue-600 rounded">
+                    <label [for]="service.name" class="ms-2 text-md text-black">{{ service.name }}</label>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="absolute -bottom-16 right-0">
+                    <button type="submit"
+                        class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

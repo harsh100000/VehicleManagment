@@ -1,0 +1,37 @@
+<!-- src/app/status/status.component.html -->
+<div class="p-4">
+
+
+    <h2 class="text-center text-2xl font-bold mb-4">Service Status</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-gray-800 text-white">
+          <tr>
+            <th class="py-3 px-4 text-left">Car Make</th>
+            <th class="py-3 px-4 text-left">Car Model</th>
+            <th class="py-3 px-4 text-left">Year</th>
+            <th class="py-3 px-4 text-left">VIN</th>
+            <th class="py-3 px-4 text-left">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr *ngFor="let car of cars" class="border-b hover:bg-gray-100">
+            <td class="py-3 px-4">{{ car.make }}</td>
+            <td class="py-3 px-4">{{ car.model }}</td>
+            <td class="py-3 px-4">{{ car.year }}</td>
+            <td class="py-3 px-4">{{ car.vin }}</td>
+            <td class="py-3 px-4">
+              <span [ngClass]="{
+                'bg-green-200 text-green-800': car.status === 'Completed',
+                'bg-yellow-200 text-yellow-800': car.status === 'In Service',
+                'bg-red-200 text-red-800': car.status === 'Pending'
+              }" class="py-1 px-3 rounded-full text-xs">
+                {{ car.status }}
+              </span>
+            </td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

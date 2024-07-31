@@ -1,0 +1,128 @@
+import { Component } from '@angular/core';
+@Component({
+  selector: 'app-temp',
+  templateUrl: './temp.component.html',
+  styleUrl: './temp.component.css'
+})
+export class TempComponent {
+  showModal = false;
+  newContact = {
+    name: '',
+    email: '',
+    mobile: ''
+  };
+
+  toggleModal() {
+    this.showModal = !this.showModal;
+  }
+
+  onSubmit() {
+    this.toggleModal();
+    this.newContact = { name: '', email: '', mobile: '' };
+  }
+
+
+
+  contactId: number = 0;
+  contactName: string = "";
+  contactPhone: string = "";
+  contactEmail: string = "";
+  allContacts: Contact[] = [];
+  isEditing: boolean = false;
+  editingIndex: number | null = null;
+  totalContacts: number = this.allContacts.length;
+  constructor() {
+    this.allContacts = this.getContacts();
+  }
+
+  createContact() {
+    if (this.isEditing) {
+      this.saveEdit();
+    } 
+    else 
+    {
+      if(this.contactName!=="" && this.contactPhone!=="")
+      {
+        let contact: Contact = {
+          contactId : this.getRandomTaskId(),
+          contactName: this.contactName,
+          contactPhone: this.contactPhone,
+          contactEmail: this.contactEmail,
+        };
+        this.allContacts.push(contact);
+        localStorage.setItem('contacts', JSON.stringify(this.allContacts));
+        this.clearForm();
+      }
+    }
+  }
+
+  editContact(index: number) {
+    this.showModal = !this.showModal;
+    this.isEditing = true;
+    this.editingIndex = index;
+    const contact = this.allContacts[index];
+    this.contactName = contact.contactName;
+    this.contactPhone = contact.contactPhone;
+    this.contactEmail = contact.contactEmail;
+  }
+
+  saveEdit() {
+    if (this.editingIndex !== null) {
+      this.allContacts[this.editingIndex] = {
+        contactId: this.allContacts[this.editingIndex].contactId,
+        contactName: this.contactName,
+        contactPhone: this.contactPhone,
+        contactEmail: this.contactEmail
+      };
+      localStorage.setItem("contacts", JSON.stringify(this.allContacts));
+      this.isEditing = false;
+      this.editingIndex = null;
+      this.clearForm();
+    }
+  }
+
+  getContacts(): Contact[] {
+    const jsonString = localStorage.getItem("contacts");
+    if (jsonString) {
+      this.allContacts = JSON.parse(jsonString);
+    }
+    return this.allContacts;
+  }
+
+  deleteContact(index: number) {
+    const storedContacts = localStorage.getItem('contacts');
+    if (storedContacts) {
+      this.allContacts = JSON.parse(storedContacts);
+    }
+    this.allContacts.splice(index, 1);
+    let updatedContacts = JSON.stringify(this.allContacts);
+    localStorage.setItem('contacts', updatedContacts);
+
+  }
+
+  clearForm(): void {
+    this.contactName = "";
+    this.contactPhone = "";
+    this.contactEmail = "";
+  }
+
+  getRandomTaskId(): string {
+    const characterSet = "abcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < 5; i++) {
+      result += characterSet.charAt(Math.floor(Math.random() * characterSet.length));
+    }
+    return result;
+  }
+
+
+
+}
+
+
+interface Contact {
+  contactId:string,
+  contactName: string,
+  contactPhone: string,
+  contactEmail: string,
+}

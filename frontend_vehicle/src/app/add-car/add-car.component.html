@@ -1,0 +1,88 @@
+<!-- src/app/add-car/add-car.component.html -->
+<div>
+  <h1 class="text-center text-2xl mb-3">Add Vehicle</h1>
+  <form (ngSubmit)="onSubmit(carForm)" #carForm="ngForm">
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="VehicleName"
+        >Vehicle Name</label
+      >
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="VehicleName"
+        type="text"
+        [(ngModel)]="car.VehicleName"
+        name="VehicleName"
+        required
+      />
+    </div>
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="PlateNumber"
+        >Plate Number</label
+      >
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="PlateNumber"
+        type="text"
+        [(ngModel)]="car.PlateNumber"
+        name="PlateNumber"
+        required
+      />
+    </div>
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="CustomerName"
+        >Customer Name</label
+      >
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="CustomerName"
+        type="text"
+        [(ngModel)]="car.CustomerName"
+        name="CustomerName"
+        required
+      />
+    </div>
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="AdvisorName"
+        >Advisor Name</label
+      >
+      <select
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="AdvisorName"
+        [(ngModel)]="car.workerId"
+        name="AdvisorName"
+        required
+      >
+        <option *ngFor="let advisor of advisors" [value]="advisor.id">
+          {{ advisor.name }}
+        </option>
+      </select>
+    </div>
+    <div class="flex items-center justify-between">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="submit"
+      >
+        Add Car
+      </button>
+
+      
+      <button
+        (click)="cancel()"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="submit">Cancel
+      </button> 
+
+
+
+
+    </div>
+  </form>
+</div>

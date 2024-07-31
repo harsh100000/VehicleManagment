@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Vehicle</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggleButton = document.querySelector('[data-collapse-toggle="navbar-default"]');
+      const navbar = document.getElementById('navbar-default');
+  
+      toggleButton.addEventListener('click', function () {
+        navbar.classList.toggle('hidden');
+      });
+    });
+  </script>
+  
+</body>
+</html>
